@@ -313,5 +313,23 @@
    `((class_declaration . codemetrics-rules--class-declaration)
      (method_definition . codemetrics-rules--method-declaration))))
 
+(defun codemetrics-rules-zig ()
+  "Return rules for Zig."
+  `((Decl         . (lambda (node depth nested)
+                      ;; Zig has a common Decl node for variables, funtions etc. We need to determine if this is a function
+                      (let* ((function-proto (car (codemetrics--tsc-find-children node "FnProto")))
+                             (is-function (not (null function-proto))))
+                        (if is-function
+                            (codemetrics-rules--method-declaration-using-node-name function-proto depth nested "IDENTIFIER")
+                          '(0 nil)))))
+    (ForStatement . (1 t))
+    (IfStatement  . (1 t))
+    ;; Function calls are either:
+    ;; - SuffixExpr containing IDENTIFIER and FnCallArguments
+    ;; - FieldOrFnCalls containing IDENTIFIER and FnCallArguments
+    ;; (kind of  makes it more complicated, as almost every statement is a SuffixExpr)
+    (SuffixExpr    . codemetrics-rules--recursion)
+    (FieldOrFnCall . codemetrics-rules--recursion)))
+
 (provide 'codemetrics-rules)
 ;;; codemetrics-rules.el ends here

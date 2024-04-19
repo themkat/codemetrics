@@ -25,4 +25,5 @@
  (depends-on "lua-mode")
  (depends-on "rust-mode")
  (depends-on "typescript-mode")
+ (depends-on "zig-mode")
  (depends-on "tree-sitter-langs"))

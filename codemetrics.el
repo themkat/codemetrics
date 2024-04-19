@@ -77,7 +77,8 @@
     (sh-mode         . ,(codemetrics-rules-bash))
     (scala-mode      . ,(codemetrics-rules-scala))
     (swift-mode      . ,(codemetrics-rules-swift))
-    (typescript-mode . ,(codemetrics-rules-typescript)))
+    (typescript-mode . ,(codemetrics-rules-typescript))
+    (zig-mode        . ,(codemetrics-rules-zig)))
   "An alist of (major-mode . (node-type . weight)).
 
 WEIGHT is used to determine the final score."

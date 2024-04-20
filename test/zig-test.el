@@ -51,4 +51,20 @@
     (SuffixExpr . 0)
     (SuffixExpr . 0)))
 
+(codemetrics-test zig-recursion
+  "test/zig/Recursion.zig"
+  zig-mode
+  '(2
+    (Decl . 0)
+    (SuffixExpr . 0)
+    (SuffixExpr . 0)
+    (IfStatement . 1)
+    (SuffixExpr . 0)
+    (SuffixExpr . 0)
+    (SuffixExpr . 0)
+    (SuffixExpr . 0)
+    (SuffixExpr . 1)
+    (SuffixExpr . 0)
+    (SuffixExpr . 0)))
+
 ;;; zig-test.el ends here

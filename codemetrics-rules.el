@@ -51,6 +51,7 @@
 (declare-function codemetrics-rules--ruby-binary "codemetrics.el")
 (declare-function codemetrics-rules--rust-outer-loop "codemetrics.el")
 (declare-function codemetrics-rules--scala-call-expression "codemetrics.el")
+(declare-function codemetrics-rules--recursion-zig "codemetrics.el")
 
 ;;
 ;; (@* "Rules" )
@@ -328,8 +329,8 @@
     ;; - SuffixExpr containing IDENTIFIER and FnCallArguments
     ;; - FieldOrFnCalls containing IDENTIFIER and FnCallArguments
     ;; (kind of  makes it more complicated, as almost every statement is a SuffixExpr)
-    (SuffixExpr    . codemetrics-rules--recursion)
-    (FieldOrFnCall . codemetrics-rules--recursion)))
+    (SuffixExpr    . codemetrics-rules--recursion-zig)
+    (FieldOrFnCall . codemetrics-rules--recursion-zig)))
 
 (provide 'codemetrics-rules)
 ;;; codemetrics-rules.el ends here

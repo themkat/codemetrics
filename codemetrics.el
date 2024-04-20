@@ -402,6 +402,15 @@ For argument NODE, see function `codemetrics-analyze' for more information."
   "Handle recursion for most languages uses `identifier' as the keyword."
   (codemetrics-rules--recursion-using-node-name node "identifier"))
 
+(defun codemetrics-rules--recursion-zig (node &rest _)
+  "Handle recursion for Zig, including checking if expression is a function call."
+  ;; Functions contain a IDENTIFIER and FnCallArguments
+  (let* ((arguments (car (codemetrics--tsc-find-children node "FnCallArguments")))
+         (is-function-call (not (null arguments))))
+    (if is-function-call
+        (codemetrics-rules--recursion-using-node-name node "IDENTIFIER")
+      '(0 nil))))
+
 (defun codemetrics-rules--elixir-call (node depth nested)
   "Define rule for Elixir `call' declaration.
 
